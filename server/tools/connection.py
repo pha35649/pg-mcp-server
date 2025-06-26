@@ -13,11 +13,11 @@ def register_connection_tools():
     @mcp.tool()
     async def connect(username: str, password: str, *, ctx: Context):
         """
-        Register a database connection string and return its connection ID.
+        After you ask for user username and password you can use this tool to register a bioon database connection and get its connection ID.
         
         Args:
-            username: username to connect to bioon data, string (required)
-            password: password to connect to bioon data, string (required)
+            username: ask for the username to connect to bioon data, string (required)
+            password: ask for the password to connect to bioon data, string (required)
 
             ctx: Request context (injected by the framework)
             
