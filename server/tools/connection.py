@@ -2,6 +2,7 @@
 from server.config import mcp
 from mcp.server.fastmcp import Context
 from server.logging_config import get_logger
+from urllib.parse import quote_plus
 
 logger = get_logger("pg-mcp.tools.connection")
 
@@ -10,12 +11,14 @@ def register_connection_tools():
     logger.debug("Registering database connection tools")
     
     @mcp.tool()
-    async def connect(connection_string: str, *, ctx: Context):
+    async def connect(username: str, password: str, *, ctx: Context):
         """
         Register a database connection string and return its connection ID.
         
         Args:
-            connection_string: PostgreSQL connection string (required)
+            username: username to connect to bioon data, string (required)
+            password: password to connect to bioon data, string (required)
+
             ctx: Request context (injected by the framework)
             
         Returns:
@@ -24,7 +27,11 @@ def register_connection_tools():
         # Get database from context
         # db = ctx.request_context.lifespan_context.get("db")
         db = mcp.state["db"]
-        
+        user_enc = quote_plus(username)
+        pwd_enc  = quote_plus(password)
+
+        connection_string = f"postgresql://{user_enc}:{pwd_enc}@db.ggezwajibfiviygxgkot.supabase.co:5432/postgres?sslmode=require"
+
         # Register the connection to get a connection ID
         conn_id = db.register_connection(connection_string)
         
