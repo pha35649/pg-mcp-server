@@ -49,7 +49,7 @@ def register_query_tools():
     logger.debug("Registering query tools")
     
     @mcp.tool()
-    async def pg_query(query: str, conn_id: str, params=None):
+    async def bioon_query(query: str, conn_id: str, params=None):
         """
         Execute a read-only SQL query against the PostgreSQL database.
         
@@ -63,25 +63,3 @@ def register_query_tools():
         """
         # Execute the query using the connection ID 
         return await execute_query(query, conn_id, params)
-        
-    @mcp.tool()
-    async def pg_explain(query: str, conn_id: str, params=None):
-        """
-        Execute an EXPLAIN (FORMAT JSON) query to get PostgreSQL execution plan.
-        
-        Args:
-            query: The SQL query to analyze
-            conn_id: Connection ID previously obtained from the connect tool
-            params: Parameters for the query (optional)
-            
-        Returns:
-            Complete JSON-formatted execution plan
-        """
-        # Prepend EXPLAIN to the query
-        explain_query = f"EXPLAIN (FORMAT JSON) {query}"
-        
-        # Execute the explain query
-        result = await execute_query(explain_query, conn_id, params)
-        
-        # Return the complete result
-        return result
