@@ -57,5 +57,8 @@ def register_natural_language_prompts():
         """
         Prompt to guide AI agents in connecting to bioon ecosystem.
         """        
-        # Render the prompt template        
-        return [start_bioon]
+        # Render the prompt template     
+        prompt_template = template_env.get_template("start_bioon.md.jinja2")
+        prompt_text = prompt_template.render()
+        
+        return [base.UserMessage(prompt_text)]
