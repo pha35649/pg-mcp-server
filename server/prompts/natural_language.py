@@ -27,4 +27,4 @@ def register_natural_language_prompts():
         # Render the prompt template
         prompt_text = template_env.get_template("start_bioon.md.jinja2")
         
-        return [base.UserMessage(prompt_text)]
+        return [prompt_text]
