@@ -26,6 +26,7 @@ register_schema_resources()   # Schema-related resources (schemas, tables, colum
 register_data_resources()     # Data-related resources (sample, rowcount, etc.)
 register_connection_tools()   # Connection management tools
 register_query_tools()
+register_natural_language_prompts()
 
 from contextlib import asynccontextmanager
 from starlette.applications import Starlette
